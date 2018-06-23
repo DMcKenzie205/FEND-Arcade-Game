@@ -96,6 +96,15 @@ var Engine = (function(global) {
         player.update();
     }
 
+    function checkCollisions() {
+        allEnemies.forEach(enemy => {
+            if((player.y - enemy.y < 3 && player.y - enemy.y > -3) &&
+                (player.x - enemy.x < 5 && player.x - enemy.x > -5)){
+                reset();
+            }
+        })
+    }
+
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
      * game tick (or loop of the game engine) because that's how games work -
@@ -161,7 +170,8 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        //player.reset();
+        
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -173,7 +183,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-pink-girl.png'
     ]);
     Resources.onReady(init);
 
