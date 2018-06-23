@@ -170,8 +170,10 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        //player.reset();
-        
+        player.reset();
+        allEnemies.forEach(function(enemy) {
+            enemy.reset();
+        });  
     }
 
     /* Go ahead and load all of the images we know we're going to need to

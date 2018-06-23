@@ -33,6 +33,10 @@ class Enemy {
     render () {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     };
+
+    reset () {
+        this.speed = Math.round(Math.random() * 3) + 1;
+    }
 }
 
 
@@ -42,7 +46,7 @@ class Enemy {
 class Player {
     constructor(x, y) {
         this.sprite = 'images/char-boy.png'
-        this.x = x;
+        this.x = 202;
         this.y = y;
     }
 
@@ -55,7 +59,11 @@ class Player {
     }
 
     handleInput() {
+        player.reset();
+    }
 
+    reset() {
+      
     }
 }
 
@@ -64,10 +72,21 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [];
-const enemy1 = new Enemy(60, 60, 75);
+
+for(let i = 0; i < 3; i++){
+    allEnemies[i] = new Enemy();
+    setInterval(() => {
+        if(allEnemies[0].x > 450){
+            allEnemies[allEnemies.length] = new Enemy();
+            allEnemies.splice(0, 1);
+        }
+    }, 200)
+}
+
+/*const enemy1 = new Enemy(60, 60, 75);
 allEnemies.push(enemy1);
 const enemy2 = new Enemy(100, 225, 25);
-allEnemies.push(enemy2);
+allEnemies.push(enemy2);*/
 // Place the player object in a variable called player
 
 const player = new Player(200, 404);
