@@ -63,7 +63,7 @@ class Player {
     }
 
     reset() {
-      
+
     }
 }
 
@@ -93,8 +93,8 @@ const player = new Player(200, 404);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+document.addEventListener('keyup', e => {
+    const allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
