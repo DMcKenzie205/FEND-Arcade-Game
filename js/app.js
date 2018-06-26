@@ -22,9 +22,9 @@ class Enemy {
     update (dt) {
         this.x = (this.x + dt * this.speed * 150) % (500);
         // Detect when the enemy disappears from the RH side of the screen
-        /*if (this.x >= 500) {
+        if (this.x >= 500) {
             this.x = -100;
-        }*/
+        }
         
 
     };
@@ -35,7 +35,7 @@ class Enemy {
     };
 
     reset () {
-        this.speed = Math.round(Math.random() * 3) + 1;
+        this.speed = Math.round(Math.random() * 2) + 1;
     }
 }
 
@@ -47,7 +47,7 @@ class Player {
     constructor(x, y) {
         this.sprite = 'images/char-boy.png'
         this.x = 202;
-        this.y = y;
+        this.y = 404;
     }
 
     update(x, y) {
@@ -58,12 +58,22 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-    handleInput() {
-        player.reset();
+    handleInput(keyPressed) {
+        if(keyPressed === 'left') {
+            this.x -= 101;
+        } else if(keyPressed === 'down') {
+            this.y += 85;
+        } else if(keyPressed === 'right') {
+            this.x += 101;
+        } else if(keyPressed === 'up') {
+            this.y -= 85;
+        }
+
     }
 
     reset() {
-
+        this.x = 202;
+        this.y = 404;
     }
 }
 
@@ -73,7 +83,7 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [];
 
-for(let i = 0; i < 3; i++){
+for(let i = 0; i < 4; i++){
     allEnemies[i] = new Enemy();
     setInterval(() => {
         if(allEnemies[0].x > 450){
@@ -89,10 +99,11 @@ const enemy2 = new Enemy(100, 225, 25);
 allEnemies.push(enemy2);*/
 // Place the player object in a variable called player
 
-const player = new Player(200, 404);
+const player = new Player();
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+
+// This listens for key presses and sends the keys to
+// Player.handleInput() method.
 document.addEventListener('keyup', e => {
     const allowedKeys = {
         37: 'left',
@@ -102,4 +113,6 @@ document.addEventListener('keyup', e => {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+    console.log(allowedKeys[e.keyCode]);
 });
+

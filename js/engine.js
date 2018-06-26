@@ -101,7 +101,7 @@ const Engine = ((global => {
         allEnemies.forEach(enemy => {
             if((player.y - enemy.y < 3 && player.y - enemy.y > -3) &&
                 (player.x - enemy.x < 5 && player.x - enemy.x > -5)){
-                reset();
+                Player.reset();
             }
         })
     }
