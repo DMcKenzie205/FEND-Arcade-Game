@@ -2,15 +2,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Effective JavaScript: Frogger</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <header>
+        <h1>Dan's Arcade Game</h1>
+        <div class="timer">0 secs</div>
+    </header>
     <aside class="modal">
         <div class="modal-content">
             <h1>Congratulations, you WON!!!</h1>
-            <div class="timer">0 mins 0 secs</div>
-            <p class="win-msg">You did this in <strong class="time">Final Time</strong></p>
+            <p class="win-msg">You did this in <strong class="timer">0 secs</strong></p>
             
             <button id="newGameBtn">New Game?</button>
         </div>

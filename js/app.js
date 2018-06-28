@@ -1,3 +1,19 @@
+const timers = document.querySelectorAll('.timer');
+let seconds = 0;
+let timerInterval;
+let startTime;
+
+const modal = document.querySelector('.modal');
+const button = document.querySelector('#newGameBtn');
+
+button.addEventListener('click', ev => {
+    ev.preventDefault();
+    toggleModal();
+    seconds = 0;
+    timers.forEach(timer => updateTimerDisplay(timer))
+    player.reset();
+});
+
 // Enemies our player must avoid
 class Enemy {
     // Variables applied to each of our instances go here,
@@ -59,6 +75,10 @@ class Player {
     }
 
     handleInput(keyPressed) {
+        if (!timerInterval) {
+        startTimer();
+        }
+
         switch (keyPressed) {
             case 'left' :
                 this.moveLeft();
@@ -107,7 +127,9 @@ class Player {
 
     winGame() {
         if(this.y === -21){
+            stopTimer();
             toggleModal();
+
         }
     }
 }
@@ -151,14 +173,23 @@ document.addEventListener('keyup', e => {
 });
 
 function toggleModal() {
-    const modal = document.querySelector('.modal');
-    /*let finalTime = timer.innerHTML;*/
+    modal.classList.toggle('show-modal');  
+}
 
-    modal.classList.toggle('show-modal');
+/* Timer function */
+function startTimer() {
+    seconds = 0
+    timerInterval = setInterval(function() {
+        seconds++;
+        timers.forEach(timer => updateTimerDisplay(timer))
+    }, 1000)
+}
 
-    let button = document.querySelector('#newGameBtn');
-    button.addEventListener('click', ev => {
-        modal.classList.toggle('show-modal');
-        player.reset();
-    });
+function updateTimerDisplay(timer) {
+    timer.innerHTML = `${seconds}secs`; 
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = undefined;
 }
