@@ -90,6 +90,7 @@ class Player {
     moveUp() {
         if(this.y - 85 >= -21) {
             this.y -= 85;
+            this.winGame();
         }
     }
 
@@ -106,13 +107,11 @@ class Player {
 
     winGame() {
         if(this.y === -21){
-            gameOver();
+            toggleModal();
         }
     }
 }
 
-
-function 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -151,3 +150,15 @@ document.addEventListener('keyup', e => {
     console.log(allowedKeys[e.keyCode]);
 });
 
+function toggleModal() {
+    const modal = document.querySelector('.modal');
+    /*let finalTime = timer.innerHTML;*/
+
+    modal.classList.toggle('show-modal');
+
+    let button = document.querySelector('#newGameBtn');
+    button.addEventListener('click', ev => {
+        modal.classList.toggle('show-modal');
+        player.reset();
+    });
+}
