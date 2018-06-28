@@ -80,7 +80,7 @@ const Engine = ((global => {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -101,7 +101,7 @@ const Engine = ((global => {
         allEnemies.forEach(enemy => {
             if((player.y - enemy.y < 3 && player.y - enemy.y > -3) &&
                 (player.x - enemy.x < 5 && player.x - enemy.x > -5)){
-                Player.reset();
+                    player.reset();
             }
         })
     }
@@ -117,7 +117,7 @@ const Engine = ((global => {
          * for that particular row of the game level.
          */
         const rowImages = [
-                'images/water-block.png',   // Top row is water
+                'images/grass-block.png',   // Top row is water
                 'images/stone-block.png',   // Row 1 of 3 of stone
                 'images/stone-block.png',   // Row 2 of 3 of stone
                 'images/stone-block.png',   // Row 3 of 3 of stone

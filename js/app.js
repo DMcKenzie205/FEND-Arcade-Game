@@ -59,25 +59,60 @@ class Player {
     }
 
     handleInput(keyPressed) {
-        if(keyPressed === 'left') {
+        switch (keyPressed) {
+            case 'left' :
+                this.moveLeft();
+                break;
+            case 'right' :
+                this.moveRight();
+                break;
+            case 'up' :
+                this.moveUp();
+                break;
+            case 'down' :
+                this.moveDown();
+                break;
+        }
+    }
+
+    moveLeft() {
+        if(this.x - 101 >= 0) {
             this.x -= 101;
-        } else if(keyPressed === 'down') {
-            this.y += 85;
-        } else if(keyPressed === 'right') {
+        }
+    }
+
+    moveRight() {
+        if(this.x + 101 <= 404) {
             this.x += 101;
-        } else if(keyPressed === 'up') {
+        }
+    }
+
+    moveUp() {
+        if(this.y - 85 >= -21) {
             this.y -= 85;
         }
+    }
 
+    moveDown() {
+        if(this.y + 85 <= 404) {
+            this.y += 85;
+        }
     }
 
     reset() {
         this.x = 202;
         this.y = 404;
     }
+
+    winGame() {
+        if(this.y === -21){
+            gameOver();
+        }
+    }
 }
 
 
+function 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
