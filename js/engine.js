@@ -80,7 +80,11 @@ const Engine = ((global => {
      */
     function update(dt) {
         updateEntities(dt);
-        checkCollisions();
+        const hasCollided = checkCollisions();
+        if (hasCollided) {
+            // player.reset();
+            // console.log('oops Collided');
+        }
     }
 
     /* This is called by the update function and loops through all of the
@@ -98,12 +102,27 @@ const Engine = ((global => {
     }
 
     function checkCollisions() {
-        allEnemies.forEach(enemy => {
-            if((player.y - enemy.y < 3 && player.y - enemy.y > -3) &&
-                (player.x - enemy.x < 5 && player.x - enemy.x > -5)){
-                    player.reset();
+        let collided = false;
+
+        /*allEnemies.forEach(enemy => {
+            const leftCollision = player.collisionBox.x2 > enemy.collisionBox.x1
+                                    && player.collisionBox.x2 < enemy.collisionBox.x2
+                                    && player.collisionBox.y2 === enemy.collisionBox.y2;
+
+            const rightCollision = enemy.collisionBox.x2 > player.collisionBox.x1
+                                    && enemy.collisionBox.x2 < player.collisionBox.x2
+                                    && player.collisionBox.y2 === enemy.collisionBox.y2;
+            // console.log(enemy.collisionBox.y2, player.collisionBox.y2);
+            // console.log(player.collisionBox.x1, player.collisionBox.x2);
+            const topCollision = 0;
+
+            const bottomCollision = 0;
+            // console.log(leftCollision, rightCollision);
+            if(( leftCollision || rightCollision || topCollision || bottomCollision)) {
+                collided = true;
             }
-        })
+        });*/
+        return collided;
     }
 
     /* This function initially draws the "game level", it will then call
