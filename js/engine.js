@@ -80,10 +80,9 @@ const Engine = ((global => {
      */
     function update(dt) {
         updateEntities(dt);
-        const hasCollided = checkCollisions();
         if (hasCollided) {
-            // player.reset();
-            // console.log('oops Collided');
+            player.reset();
+            //console.log('oops Collided');
         }
     }
 
@@ -101,29 +100,6 @@ const Engine = ((global => {
         player.update();
     }
 
-    function checkCollisions() {
-        let collided = false;
-
-        /*allEnemies.forEach(enemy => {
-            const leftCollision = player.collisionBox.x2 > enemy.collisionBox.x1
-                                    && player.collisionBox.x2 < enemy.collisionBox.x2
-                                    && player.collisionBox.y2 === enemy.collisionBox.y2;
-
-            const rightCollision = enemy.collisionBox.x2 > player.collisionBox.x1
-                                    && enemy.collisionBox.x2 < player.collisionBox.x2
-                                    && player.collisionBox.y2 === enemy.collisionBox.y2;
-            // console.log(enemy.collisionBox.y2, player.collisionBox.y2);
-            // console.log(player.collisionBox.x1, player.collisionBox.x2);
-            const topCollision = 0;
-
-            const bottomCollision = 0;
-            // console.log(leftCollision, rightCollision);
-            if(( leftCollision || rightCollision || topCollision || bottomCollision)) {
-                collided = true;
-            }
-        });*/
-        return collided;
-    }
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -191,10 +167,6 @@ const Engine = ((global => {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        player.reset();
-        allEnemies.forEach(enemy => {
-            enemy.reset();
-        });  
     }
 
     /* Go ahead and load all of the images we know we're going to need to
