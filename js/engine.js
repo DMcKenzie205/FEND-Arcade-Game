@@ -80,9 +80,9 @@ const Engine = ((global => {
      */
     function update(dt) {
         updateEntities(dt);
-        if (hasCollided) {
+        if (checkCollisions()) {
+            console.log('oops Collided');
             player.reset();
-            //console.log('oops Collided');
         }
     }
 

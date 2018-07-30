@@ -2,81 +2,72 @@
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player extends CanvasEntity {
-    constructor(x, y) {
-        x = x || 202;
-        y = y || 404;
+    constructor() {
+        const sprite = 'images/char-boy.png';
+        const x = 202;
+        const y = 404;
+        const width = 101;
+        const height = 171;
 
-        const sprite = 'images/char-boy.png'
-        const sprHeight = 171;
-        const sprWidth = 101;
-        const collHeight = 75;
-        const collWidth = 66;
-        const leftWhitespace = 17.5;
-        const bottomWhitespace = 31;
-
-        super (x, y, sprite, sprHeight, sprWidth, collHeight, 
-                collWidth, leftWhitespace, bottomWhitespace);
-
-        // Track the player's original starting position for resetting
-        this.startingPosition = { x, y }
-    }
-
-    render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
-
-    handleInput(keyPressed) {
-        if (!timerInterval) {
-        startTimer();
+        const collision = {
+            offset: {
+                x: 51,
+                y: 70
+            },
+            width: 33.5,
+            height: 38
         }
 
-        switch (keyPressed) {
-            case 'left' :
-                this.moveLeft();
-                break;
-            case 'right' :
-                this.moveRight();
-                break;
-            case 'up' :
-                this.moveUp();
-                break;
-            case 'down' :
-                this.moveDown();
-                break;
+
+        super (x, y, sprite, height, width, collision);
+    }
+
+    // Take the keypress as per app.js and instruct how to move the player
+    handleInput(direction) {
+        if (!timerInterval) { startTimer(); };
+
+        const {x, y} = this.getCurrentPosition();
+        switch (direction) {
+            case 'left': this.moveLeft(x, y); break;
+            case 'right': this.moveRight(x, y); break;
+            case 'up': this.moveUp(x, y); break;
+            case 'down': this.moveDown(x, y); break;
         }
     }
 
-    moveLeft() {
-        if(this.x - 101 >= 0) {
-            this.x -= 101;
+    moveLeft(x, y) {
+        if(x - 101 >= 0) {
+            this.update(x - 101, y);
         }
     }
 
-    moveRight() {
-        if(this.x + 101 <= 404) {
-            this.x += 101;
+    moveRight(x, y) {
+        if(x + 101 <= 404) {
+            this.update(x + 101, y);
         }
     }
 
-    moveUp() {
-        if(this.y - 85 >= -21) {
-            this.y -= 85;
-            hasWonGame();
+    moveUp(x, y) {
+        if(y - 83 >= -21) {
+            this.update(x, y - 83);
         }
     }
 
-    moveDown() {
-        if(this.y + 85 <= 404) {
-            this.y += 85;
+    moveDown(x, y) {
+        if(y + 83 <= 404) {
+            this.update(x, y + 83);
         }
     }
 
-    update (dt) {
-        this.calcCollisionBox();
+    update(x, y) {
+        const currentPosition = this.getCurrentPosition();
+        x = x !== undefined ? x : currentPosition.x;
+        y = y !== undefined ? y : currentPosition.y;
+
+        this.setCurrentPosition(x, y);
     }
 
-    reset() {
-        this.x = this.startingPosition.x
-        this.y = this.startingPosition.y
+    reset(x, y) {
+        this.update(202, 404);
     }
 }

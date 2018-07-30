@@ -1,3 +1,5 @@
+// https://stackoverflow.com/questions/17484227/javascript-improved-native-for-loop
+
 const timers = document.querySelectorAll('.timer');
 let seconds = 0;
 let timerInterval;
@@ -5,36 +7,29 @@ let timerInterval;
 const modal = document.querySelector('.modal');
 const button = document.querySelector('#newGameBtn');
 
-button.addEventListener('click', ev => {
-    ev.preventDefault();
-    toggleModal();
-    seconds = 0;
-    timers.forEach(timer => updateTimerDisplay(timer))
-    player.reset();
-});
-
-
-
-
-
-
-
-// Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [];
 
-for(let i = 0; i < 4; i++){
-    allEnemies[i] = new Enemy();
-    setInterval(() => {
-        if(allEnemies[0].x > 450){
-            allEnemies[allEnemies.length] = new Enemy();
-            allEnemies.splice(0, 1);
-        }
-    }, 200)
-}
+// Add newly created enemy from enemy.js to allEnemies array
+allEnemies.push(new Enemy());
 
 // Place the player object in a variable called player
-const player = new Player(202, 404);
+const player = new Player();
+
+// Check if the player has reached the final row
+function playerHasWon () {
+    return player.getCurrentPosition().y === -11
+}
+
+// Check each enemy object for a collision with the player object
+function checkCollisions() {
+    for (let i = allEnemies.length - 1; i >= 0; i--) {
+        if (allEnemies[i].hasCollidedWith(player)) {
+            return true;
+        }
+    }
+    return false;
+}
 
 // This listens for key presses and sends the keys to
 // Player.handleInput() method.
@@ -47,12 +42,25 @@ document.addEventListener('keyup', e => {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+
+    if (playerHasWon()) {
+        stopTimer();
+        toggleModal();
+    }
 });
 
 
 function toggleModal() {
     modal.classList.toggle('show-modal');  
 }
+
+button.addEventListener('click', ev => {
+    ev.preventDefault();
+    toggleModal();
+    seconds = 0;
+    timers.forEach(timer => updateTimerDisplay(timer))
+    player.reset();
+});
 
 /* Timer function */
 function startTimer() {
@@ -70,15 +78,4 @@ function updateTimerDisplay(timer) {
 function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = undefined;
-}
-
-function hasWonGame() {
-    const winCondition = player.y === -21;
-
-    if (winCondition) {
-        stopTimer();
-        toggleModal();
-    }
-  // Returning to help debugging
-  return winCondition
 }
