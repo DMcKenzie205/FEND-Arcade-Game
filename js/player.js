@@ -1,6 +1,8 @@
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+const modalIsActive = document.querySelector('aside.modal.show-modal');
+
 class Player extends CanvasEntity {
     constructor() {
         const sprite = 'images/char-boy.png';
@@ -26,12 +28,16 @@ class Player extends CanvasEntity {
     handleInput(direction) {
         if (!timerInterval) { startTimer(); };
 
-        const {x, y} = this.getCurrentPosition();
-        switch (direction) {
-            case 'left': this.moveLeft(x, y); break;
-            case 'right': this.moveRight(x, y); break;
-            case 'up': this.moveUp(x, y); break;
-            case 'down': this.moveDown(x, y); break;
+
+        if(!modalIsActive) {
+            //debugger
+            const {x, y} = this.getCurrentPosition();
+            switch (direction) {
+                case 'left': this.moveLeft(x, y); break;
+                case 'right': this.moveRight(x, y); break;
+                case 'up': this.moveUp(x, y); break;
+                case 'down': this.moveDown(x, y); break;
+            }
         }
     }
 
