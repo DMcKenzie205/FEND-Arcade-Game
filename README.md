@@ -8,6 +8,7 @@ This is an animated game based on the Frogger concept. The aim is to cross the b
 * [Source](#Source)
 * [Collisions](#Collisions)
 * [Known Bugs](#Bugs)
+* [Play Now!](#Play)
 
 ## Installation
 
@@ -18,7 +19,7 @@ $ cd FEND-Arcade-game`
 
 ## Source
 
-This project is done as part of the Udacity Front-End NanoDegree (FEND). The code is based on a basic structure provided by Udacity. The original Source files can be found at 
+This project is done as part of the Udacity Front-End NanoDegree (FEND). The code is based on a basic structure provided by Udacity. The original Source files can be found at https://github.com/udacity/frontend-nanodegree-arcade-game
 
 ## Collisions
 
@@ -28,8 +29,10 @@ The advantage of this approach is that the game can, in the future, add any kind
 
 ## Bugs
 
-Currently, upon completing the game, it is still possible to move the player sprite and break the endgame condition. Initial attempts to wrap the 'player.handleInput' call within an if function in app.js have not fixed the bug. Further work to be done on this to remove the key press ability when the modal window is displayed.
-
 The code that generates the enemy sprites is not sufficiently random and 75% of sprites are usually on the same line. Randomisation to be improved.
 
 The enemy sprites overrun each other when of varying speeds. Enemy.js collision code to be added that detects collision between enemies and slow down the colliding enemy sprite.
+
+## Play
+
+The game can be played at https://dmckenzie205.github.io/FEND-Arcade-Game/
