@@ -38,6 +38,7 @@ class CanvasEntity {
     }
 
     hasCollidedWith(otherSprite) {
+        //Set the variables needed for the collision calculation
         const myPosition = this.getCurrentPosition();
         const myOffset = this.getCollisionOffset();
         const myDimensions = this.getCollisionDimensions();

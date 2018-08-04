@@ -1,3 +1,4 @@
+// extend class from sprite.js
 class Enemy extends CanvasEntity {  
     constructor() {
         const sprite = 'images/enemy-bug.png';
@@ -7,6 +8,8 @@ class Enemy extends CanvasEntity {
         const y = (() => [66, 149, 232][Math.round(Math.random() * 2)])();
         const width = 171;
         const height = 101;
+        
+        // Set the sprite dimensions within the image for collision calculation
         const collision = {
             offset: {
                 x: 50,
