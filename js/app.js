@@ -57,12 +57,12 @@ document.addEventListener('keyup', e => {
 
     // Check if the modal window is active and prevent key presses if so
     if(!document.querySelector('.modal.show-modal')) {
-        player.handleInput(allowedKeys[e.keyCode]); 
-    } 
+        player.handleInput(allowedKeys[e.keyCode]);
 
-    if (playerHasWon()) {
-        stopTimer();
-        toggleModal();
+        if (playerHasWon()) {
+            stopTimer();
+            toggleModal();
+        }
     }
 });
 
